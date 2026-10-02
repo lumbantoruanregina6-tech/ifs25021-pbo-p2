@@ -22,7 +22,7 @@ public class ActivityRepository implements IActivityRepository {
 
     @Override
     public Activity save(String title, String day, String time) {
-        Activity activity = new Activity(++idCounter, title, day, time);
+        Activity activity = new Activity(nextId(), title, day, time);
         data.add(activity);
         return activity;
     }
@@ -34,5 +34,10 @@ public class ActivityRepository implements IActivityRepository {
 
     @Override
     public void update(Activity activity) {
+        // In-memory: entity disimpan by-reference, sehingga perubahan sudah tercermin.
+    }
+
+    private int nextId() {
+        return ++idCounter;
     }
 }

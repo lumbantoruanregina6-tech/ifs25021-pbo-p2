@@ -22,7 +22,7 @@ public class ContactRepository implements IContactRepository {
 
     @Override
     public Contact save(String name, String phone, String email) {
-        Contact contact = new Contact(++idCounter, name, phone, email);
+        Contact contact = new Contact(nextId(), name, phone, email);
         data.add(contact);
         return contact;
     }
@@ -34,5 +34,10 @@ public class ContactRepository implements IContactRepository {
 
     @Override
     public void update(Contact contact) {
+        // In-memory: entity disimpan by-reference, sehingga perubahan sudah tercermin.
+    }
+
+    private int nextId() {
+        return ++idCounter;
     }
 }
